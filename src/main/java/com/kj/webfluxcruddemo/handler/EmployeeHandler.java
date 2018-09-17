@@ -102,8 +102,9 @@ public class EmployeeHandler {
     public Mono<ServerResponse> deleteAnEmployee(ServerRequest request) {
         String employeeId = request.pathVariable("id");
         return employeeRepository.findById(employeeId)
-                .flatMap(employee -> {
-                    return employeeRepository.delete(employee).then(ServerResponse.ok().build());
-                }).switchIfEmpty(ServerResponse.notFound().build());
+                .flatMap(employee -> employeeRepository
+                        .delete(employee)
+                        .then(ServerResponse.ok().build()))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 }
