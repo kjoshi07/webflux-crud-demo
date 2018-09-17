@@ -103,8 +103,7 @@ public class EmployeeHandler {
         String employeeId = request.pathVariable("id");
         return employeeRepository.findById(employeeId)
                 .flatMap(employee -> {
-                    employeeRepository.delete(employee);
-                    return ServerResponse.ok().build();
+                    return employeeRepository.delete(employee).then(ServerResponse.ok().build());
                 }).switchIfEmpty(ServerResponse.notFound().build());
     }
 }

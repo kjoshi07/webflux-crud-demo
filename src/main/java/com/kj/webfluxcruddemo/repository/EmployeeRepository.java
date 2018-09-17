@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 
 @Repository
-public interface EmployeeRepository extends ReactiveMongoRepository<Employee, UUID> {
+public interface EmployeeRepository extends ReactiveMongoRepository<Employee, String> {
 
     Mono<Employee> findById(String employeeId);
 }
